@@ -5,6 +5,7 @@ services:
 - kubelet
 
 ports:
+- "53"
 - "80"
 - "443"
 - "2222"
