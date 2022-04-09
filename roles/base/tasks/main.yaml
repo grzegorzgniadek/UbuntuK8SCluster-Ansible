@@ -19,7 +19,6 @@
     protocol: tcp
   with_items: "{{ ports }}"
 
-
 - name: Firewall rule - drop any traffic without rule
   iptables:
     chain: INPUT
