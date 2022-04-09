@@ -13,5 +13,10 @@ ports:
 - "10250"
 - "30000:32767"
 
+ports_udp:
+- "631"
+- "5353"
+- "46411"
+
 token_file: join_token
 
