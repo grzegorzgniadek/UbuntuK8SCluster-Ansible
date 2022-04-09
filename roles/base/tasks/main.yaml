@@ -52,8 +52,8 @@
     $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 
 - name: Install dependencies
-  update_cache: yes
   apt: 
+    update_cache: yes
     name: "{{ packages }}"
   vars:
     packages:
