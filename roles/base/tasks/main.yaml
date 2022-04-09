@@ -68,7 +68,7 @@
 
 - name: Add Docker repository.
   apt_repository:
-    repo: deb [arch={{ docker_apt_arch }}] {{ docker_repo_url }}/{{ ansible_distribution | lower }} {{ ansible_distribution_release }} {{ docker_apt_release_channel }}
+    repo: deb [arch=amd64] {{ docker_repo_url }}/{{ ansible_distribution | lower }} {{ ansible_distribution_release }} {{ docker_apt_release_channel }}
     state: present
     update_cache: true
 
