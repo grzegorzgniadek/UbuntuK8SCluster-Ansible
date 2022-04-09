@@ -32,7 +32,6 @@
 
 - name: Install dependencies
   apt: 
-    update_cache: yes
     name: "{{ item }}"
   with_items:
       - ca-certificates
