@@ -44,7 +44,8 @@
     mode: '777'
 
 - name: Add Docker gpg key
-  url: https://download.docker.com/linux/ubuntu/gpg
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
 
 - name: Add repo
   shell: echo \
