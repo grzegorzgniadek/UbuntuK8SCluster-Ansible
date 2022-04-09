@@ -23,5 +23,8 @@ ports_udp:
 - "46411"
 - "46420"
 
+ports_udp_v6:
+- "46420"
+
 token_file: join_token
 
