@@ -1,0 +1,79 @@
+- name: Upgrade all packages
+  apt:
+    upgrade: full
+
+- name: Disabling Swap on all nodes
+  shell: swapoff -a
+
+- name: Commenting Swap entries in /etc/fstab
+  replace:
+    path: /etc/fstab
+    regexp: '(^/.*swap*)'
+    replace: '# \1'
+
+- name: Iptables Allow
+  iptables:
+    chain: INPUT
+    destination_ports: "{{ ports }}"
+
+- name: Iptables Allow
+  iptables:
+    chain: INPUT
+    jump: DROP
+
+- name: Install dependencies
+  update_cache: yes
+  apt: 
+    name: "{{ packages }}"
+  vars:
+    packages:
+      - ca-certificates
+      - curl
+      - gnupg
+      - lsb-release
+
+- name: Install docker-compose
+  shell:
+    curl -L "https://github.com/docker/compose/releases/download/v2.4.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+
+- name: Change mod on docker-compose
+  file:
+    path: /usr/local/bin/docker-compose
+    mode: '777'
+
+- name: Add Docker gpg key
+  url: https://download.docker.com/linux/ubuntu/gpg
+
+- name: Add repo
+  shell: echo \
+    "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
+    $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+- name: Install dependencies
+  update_cache: yes
+  apt: 
+    name: "{{ packages }}"
+  vars:
+    packages:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+
+- name: Change docker daemon cgroup driver
+  copy:
+          content: |
+                  {
+                  "exec-opts": ["native.cgroupdriver=systemd"]
+                  }
+          dest: /etc/docker/daemon.json
+
+- name: Restart Docker Daemon
+  service: 
+    name: docker 
+    state: restarted
+    enabled: yes
+    
+- name: Add Kubernetes Autocomplete
+  lineinfile:
+    path: ~/.bashrc
+    line: source <(kubectl completion bash)

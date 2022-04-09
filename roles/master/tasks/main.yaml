@@ -1,0 +1,15 @@
+- name: Copying token to master nodes
+  copy: src={{ token_file }} dest=join_token
+
+- name: Joining another control planes
+  shell: |
+   kubeadm reset -f
+   cat join_token | tail -n 12 | head -n 4 > out.sh
+   sh out.sh
+
+
+- name: Copying required files to root
+  shell: |
+    mkdir -p $HOME/.kube
+    sudo cp -f /etc/kubernetes/admin.conf $HOME/.kube/config
+    sudo chown $(id -u):$(id -g) $HOME/.kube/config

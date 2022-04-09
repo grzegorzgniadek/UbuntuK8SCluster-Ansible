@@ -1,0 +1,15 @@
+cidr_v: 172.16.0.0/16
+
+services:
+- docker
+- kubelet
+
+ports:
+- "80/tcp"
+- "443/tcp"
+- "2222/tcp"
+- "10250/tcp"
+- "30000-32767/tcp"
+
+token_file: join_token
+
