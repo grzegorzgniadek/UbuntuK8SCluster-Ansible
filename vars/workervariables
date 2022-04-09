@@ -4,7 +4,7 @@ services:
 - docker
 - kubelet
 
-ports:
+ports_tcp:
 - "53"
 - "80"
 - "443"
