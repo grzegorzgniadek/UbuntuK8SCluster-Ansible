@@ -5,13 +5,13 @@ services:
 - kubelet
 
 ports:
-- "80/tcp"
-- "443/tcp"
-- "2222/tcp"
+- "80"
+- "443"
+- "2222"
 
 multi_ports:
-- "10250/tcp"
-- "30000-32767/tcp"
+- "10250"
+- "30000-32767"
 
 token_file: join_token
 
