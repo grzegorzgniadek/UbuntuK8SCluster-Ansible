@@ -6,7 +6,6 @@
   - vars/mastervariables
   roles:
   - base
-  - controlplane
 
 - hosts: UBUNTUKMaster
   become: yes
@@ -15,7 +14,7 @@
   - vars/mastervariables
   roles:
   - base
-  - master 
+
   
 - hosts: UBUNTUKWorker
   become: yes
@@ -24,4 +23,4 @@
   - vars/workervariables
   roles:
   - base
-  - worker
+
