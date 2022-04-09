@@ -23,7 +23,7 @@
 - name: Firewall rule - drop any traffic without rule
   iptables:
     chain: INPUT
-    jump: DROP
+    policy: DROP
 
 
 # - name: Install dependencies
