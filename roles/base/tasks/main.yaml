@@ -30,13 +30,11 @@
     chain: INPUT
     policy: DROP
 
-
 - name: Install dependencies
   apt: 
     update_cache: yes
-    name: "{{ packages }}"
-  vars:
-    packages:
+    name: "{{ item }}"
+  with_items:
       - ca-certificates
       - curl
       - gnupg
