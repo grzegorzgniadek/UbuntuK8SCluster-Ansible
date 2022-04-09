@@ -70,7 +70,6 @@
     repo: deb https://download.docker.com/linux/ubuntu {{ ansible_facts['lsb']['release'] }} stable
     state: present
 
-
 - name: Install docker
   apt: 
     update_cache: yes
