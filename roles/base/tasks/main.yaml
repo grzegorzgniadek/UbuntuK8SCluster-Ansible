@@ -62,26 +62,13 @@
 
 - name: Add Docker apt key.
   apt_key:
-    url: "{{ docker_apt_gpg_key }}"
+    url: https://download.docker.com/linux/ubuntu/gpg
     id: 9DC858229FC7DD38854AE2D88D81803C0EBFCD88
     state: present
-  register: add_repository_key
-  ignore_errors: "{{ docker_apt_ignore_key_error }}"
-
-- name: Ensure curl is present (on older systems without SNI).
-  package: name=curl state=present
-  when: add_repository_key is failed
-
-- name: Add Docker apt key (alternative for older systems without SNI).
-  shell: >
-    curl -sSL {{ docker_apt_gpg_key }} | apt-key add -
-  args:
-    warn: false
-  when: add_repository_key is failed
 
 - name: Add Docker repository.
   apt_repository:
-    repo: "{{ docker_apt_repository }}"
+    repo: deb [arch={{ docker_apt_arch }}] {{ docker_repo_url }}/{{ ansible_distribution | lower }} {{ ansible_distribution_release }} {{ docker_apt_release_channel }}
     state: present
     update_cache: true
 
