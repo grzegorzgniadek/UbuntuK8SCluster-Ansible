@@ -19,24 +19,11 @@
     protocol: tcp
   with_items: "{{ ports_tcp }}"
 
-- name: Iptables Allow UDP
+- name: Iptables ESTABLISHED,RELATED
   iptables:
     chain: INPUT
-    destination_port: "{{ item }}"
+    ctstate: ESTABLISHED,RELATED
     jump: ACCEPT
-    protocol: udp
-  with_items: "{{ ports_udp }}"
-
-- name: Iptables Allow UDP V6
-  iptables:
-    chain: INPUT
-    destination_port: "{{ item }}"
-    jump: ACCEPT
-    protocol: udp
-    ip_version: ipv6
-  with_items: "{{ ports_udp_v6 }}"
-
-
 
 - name: Firewall rule - drop any traffic without rule
   iptables:
