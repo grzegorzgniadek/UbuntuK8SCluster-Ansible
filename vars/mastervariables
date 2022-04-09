@@ -21,6 +21,7 @@ ports_udp:
 - "631"
 - "5353"
 - "46411"
+- "46420"
 
 token_file: join_token
 
