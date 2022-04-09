@@ -30,8 +30,6 @@
     chain: INPUT
     policy: DROP
 
-
-
 - name: Install dependencies
   apt: 
     name: "{{ item }}"
@@ -40,8 +38,9 @@
       - curl
       - gnupg
       - lsb-release
-      - netfilter-persistent
-      - iptables-persistent
+
+- name: Save iptables
+  shell: iptables-save > /etc/iptables/rules.v4
 
 - name: Install docker-compose
   shell:
