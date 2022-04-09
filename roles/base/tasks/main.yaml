@@ -43,8 +43,9 @@
   shell: iptables-save > /etc/iptables/rules.v4
 
 - name: Install docker-compose
-  shell:
-    curl -L "https://github.com/docker/compose/releases/download/v2.4.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+  get_url:
+    url: https://github.com/docker/compose/releases/download/v2.4.1/docker-compose-{{ ansible_system|lower }} -{{ ansible_architecture}}
+    dest: /usr/local/bin/docker-compose
 
 - name: Change mod on docker-compose
   file:
