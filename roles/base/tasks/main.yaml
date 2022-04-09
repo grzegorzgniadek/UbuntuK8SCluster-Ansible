@@ -61,8 +61,7 @@
     mode: '777'
 
 - name: Add Docker gpg key
-  apt_key:
-    url: https://download.docker.com/linux/ubuntu/gpg
+  shell: curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
 
 - name: Add repo
   shell: echo \
