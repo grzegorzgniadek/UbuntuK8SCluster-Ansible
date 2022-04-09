@@ -68,7 +68,7 @@
 
 - name: Add Docker repository.
   apt_repository:
-    repo: deb [arch=amd64] https://download.docker.com/{{ ansible_distribution | lower }} {{ ansible_facts['ansible_lsb']['codename'] |lower }} stable
+    repo: deb [arch=amd64] https://download.docker.com/{{ ansible_distribution | lower }} {{ ansible_lsb['codename'] |lower }} stable
     state: present
     update_cache: true
 
