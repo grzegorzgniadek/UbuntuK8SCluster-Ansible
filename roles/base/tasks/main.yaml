@@ -19,6 +19,14 @@
     protocol: tcp
   with_items: "{{ ports_tcp }}"
 
+- name: Iptables Allow UDP
+  iptables:
+    chain: INPUT
+    destination_port: "{{ item }}"
+    jump: ACCEPT
+    protocol: udp
+  with_items: "{{ ports_udp }}"
+
 - name: Iptables ESTABLISHED,RELATED
   iptables:
     chain: INPUT
