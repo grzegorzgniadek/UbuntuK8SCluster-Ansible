@@ -14,7 +14,9 @@
 - name: Iptables Allow
   iptables:
     chain: INPUT
-    destination_ports: "{{ ports }}"
+    destination_ports: "{{ item }}"
+    policy: ACCEPT
+  with_items: "{{ ports }}"
 
 - name: Iptables Allow
   iptables:
@@ -72,7 +74,7 @@
     name: docker 
     state: restarted
     enabled: yes
-    
+
 - name: Add Kubernetes Autocomplete
   lineinfile:
     path: ~/.bashrc
