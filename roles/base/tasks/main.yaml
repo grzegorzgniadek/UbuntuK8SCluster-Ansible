@@ -14,9 +14,16 @@
 - name: Iptables Allow
   iptables:
     chain: INPUT
-    destination_port: 2222
+    destination_port: "{{ item }}"
     jump: ACCEPT
     protocol: tcp
+  with_items: "{{ ports }}"
+
+
+- name: Firewall rule - drop any traffic without rule
+  iptables:
+    chain: INPUT
+    jump: DROP
 
 
 # - name: Install dependencies
