@@ -9,6 +9,8 @@ ports:
 - "443/tcp"
 - "2222/tcp"
 - "6443/tcp"
+
+multi_ports:
 - "2379-2380/tcp"
 - "10250-10252/tcp"
 

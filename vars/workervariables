@@ -8,6 +8,8 @@ ports:
 - "80/tcp"
 - "443/tcp"
 - "2222/tcp"
+
+multi_ports:
 - "10250/tcp"
 - "30000-32767/tcp"
 
