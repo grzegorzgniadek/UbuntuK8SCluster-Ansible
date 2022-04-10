@@ -50,7 +50,7 @@
 
 - name: Insert config lines in haproxy
   blockinfile:
-    path: /etc/ssh/sshd_config
+    path: /etc/haproxy/haproxy.cfg
     block: |
       frontend kubernetes-frontend
           bind 192.168.1.8:6443
