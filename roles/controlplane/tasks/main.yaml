@@ -15,6 +15,6 @@
   shell: kubectl create -f https://projectcalico.docs.tigera.io/manifests/tigera-operator.yaml
 
 - name: Install Calico custom reesources
-  shell: kubectl create -f https://gist.github.com/grzegorzgniadek/8f1ab792e2d1584d113602385ec38126
+  shell: kubectl create -f https://gist.githubusercontent.com/grzegorzgniadek/8f1ab792e2d1584d113602385ec38126/raw/26bbe10d338c3bba1325a58045f4d1df5094cd18/caliconetworkha.yaml
     
 
