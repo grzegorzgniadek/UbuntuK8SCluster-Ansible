@@ -131,3 +131,5 @@
   lineinfile:
     path: ~/.bashrc
     line: source <(kubectl completion bash)
+- name: Add Kubectl autocomplete system-wide
+  shell: kubectl completion bash | sudo tee /etc/bash_completion.d/kubectl > /dev/null
