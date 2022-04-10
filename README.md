@@ -19,11 +19,15 @@ This documentation guides you in setting up a cluster with three master nodes, t
 ## Pre-requisites Master
 Use bootstrap scripts to set up iptables:
 - Open port 2222 on OpenSSH
+- Open port 2381 on etcd/healthz
 - Open port 6443 on Kube-apiserver
+- Open port 6784 on Weave-net/status
 - Open port 2379-2380 on etcd server client API
 - Open 10250 on Kubelet API
 - Open 10251 on Kube-scheduler
 - Open 10252 on Kube-controller-Manager
+- Open 10257 on Kube-controller-Manger/healthz
+- Open 10259 on Kube-scheduler/healthz
 
 ## Pre-requisites Worker
 - Open port 2222 on OpenSSH
