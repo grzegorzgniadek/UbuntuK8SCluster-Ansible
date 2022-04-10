@@ -1,5 +1,5 @@
 ---
-- hosts: UBUNTUKLOADBALANCER
+- hosts: UBUNTULoadbalancer
   vars_files:
   - vars/loadbalancervariables
   roles:
