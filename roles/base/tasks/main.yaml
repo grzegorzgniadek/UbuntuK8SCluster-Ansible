@@ -123,6 +123,10 @@
     - kubeadm
     - kubectl
 
+- name: Joining another control planes
+  shell: |
+   kubeadm reset -f
+
 - name: Add Kubernetes Autocomplete
   lineinfile:
     path: ~/.bashrc
