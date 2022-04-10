@@ -46,6 +46,8 @@
       - curl
       - gnupg
       - lsb-release
+      - apt-transport-https
+      - 
 
 - name: Save iptables
   shell: iptables-save > /etc/iptables/rules.v4
@@ -80,8 +82,7 @@
     - docker-ce
     - docker-ce-cli
     - containerd.io
-
-
+    
 - name: Change docker daemon cgroup driver
   copy:
           content: |
@@ -95,6 +96,35 @@
     name: docker 
     state: restarted
     enabled: yes
+
+
+
+- name: Add gpg key for kubernetes repository
+  apt_key:
+    url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+    state: present
+
+- name: Add kubernetes repository into sources list
+  apt_repository:
+    repo: "deb  https://apt.kubernetes.io/ kubernetes-xenial main"
+    state: present
+    update_cache: yes
+    filename: kubernetes
+
+- name: Install Kubeadm Software
+  apt:
+    name: ['kubelet', 'kubeadm', 'kubectl']
+    state: present
+    update_cache: yes
+
+- name: Hold version of software
+  dpkg_selections:
+    name: "{{ item }}"
+    selection: hold
+  with_items:
+    - kubelet
+    - kubeadm
+    - kubectl
 
 - name: Add Kubernetes Autocomplete
   lineinfile:
