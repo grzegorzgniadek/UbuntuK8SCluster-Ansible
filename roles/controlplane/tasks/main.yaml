@@ -11,7 +11,10 @@
     sudo cp -f /etc/kubernetes/admin.conf $HOME/.kube/config
     sudo chown $(id -u):$(id -g) $HOME/.kube/config
     
-- name: Install Weave Net CNI
-  shell: kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')"
+- name: Install Calico CNI
+  shell: kubectl create -f https://projectcalico.docs.tigera.io/manifests/tigera-operator.yaml
+
+- name: Install Calico custom reesources
+  shell: kubectl create -f https://gist.github.com/grzegorzgniadek/8f1ab792e2d1584d113602385ec38126
     
 
