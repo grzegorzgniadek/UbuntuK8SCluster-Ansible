@@ -77,7 +77,7 @@
 - name: Install docker
   apt: 
     update_cache: yes
-    name: "{{ items }}"
+    name: "{{ item }}"
   with_items:
     - docker-ce
     - docker-ce-cli
