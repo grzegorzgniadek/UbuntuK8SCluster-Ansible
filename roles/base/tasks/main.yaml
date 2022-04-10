@@ -97,8 +97,6 @@
     state: restarted
     enabled: yes
 
-
-
 - name: Add gpg key for kubernetes repository
   apt_key:
     url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
