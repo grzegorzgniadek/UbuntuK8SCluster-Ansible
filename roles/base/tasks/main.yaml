@@ -135,6 +135,6 @@
     group: root
     mode: "0644"
 
-- name: Reset old kubeadm settings
+- name: Add auto-completion kubectl
   shell: |
     kubectl completion bash | sudo tee /etc/bash_completion.d/kubectl > /dev/null
