@@ -47,7 +47,6 @@
       - gnupg
       - lsb-release
       - apt-transport-https
-      - 
 
 - name: Save iptables
   shell: iptables-save > /etc/iptables/rules.v4

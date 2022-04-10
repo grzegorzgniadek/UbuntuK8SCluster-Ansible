@@ -1,3 +1,9 @@
+[UBUNTULOADBALANCER]
+192.168.1.8 
+[UBUNTUKControlplane:vars]
+ansible_connection=ssh
+ansible_port=2222
+
 [UBUNTUKControlplane]
 192.168.1.2 
 [UBUNTUKControlplane:vars]

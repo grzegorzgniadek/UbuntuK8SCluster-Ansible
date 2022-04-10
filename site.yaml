@@ -1,7 +1,11 @@
 ---
+- hosts: UBUNTUKLOADBALANCER
+  vars_files:
+  - vars/loadbalancervariables
+  roles:
+  - load-balancer
+
 - hosts: UBUNTUKControlplane
-  become: yes
-  become_user: root
   vars_files:
   - vars/mastervariables
   roles:
@@ -9,18 +13,13 @@
   - controlplane
 
 - hosts: UBUNTUKMaster
-  become: yes
-  become_user: root
   vars_files:
   - vars/mastervariables
   roles:
   - base
   - master
 
-  
 - hosts: UBUNTUKWorker
-  become: yes
-  become_user: root
   vars_files:
   - vars/workervariables
   roles:
