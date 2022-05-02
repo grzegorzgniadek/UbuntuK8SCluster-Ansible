@@ -38,15 +38,22 @@
     chain: INPUT
     policy: DROP
 
+- name: Add iptables-persistent without input
+  shell: "{{item }}"
+  loop:
+    - echo iptables-persistent iptables-persistent/autosave_v4 boolean true | sudo debconf-set-selections
+    - echo iptables-persistent iptables-persistent/autosave_v6 boolean true | sudo debconf-set-selections
+
 - name: Install dependencies
   apt: 
     name: "{{ item }}"
   with_items:
-      - ca-certificates
-      - curl
-      - gnupg
-      - lsb-release
-      - apt-transport-https
+    - ca-certificates
+    - curl
+    - gnupg
+    - lsb-release
+    - apt-transport-https
+    - iptables-persistent
 
 - name: Save iptables
   shell: iptables-save > /etc/iptables/rules.v4
