@@ -39,7 +39,7 @@
     policy: DROP
 
 - name: Add iptables-persistent without input
-  shell: "{{item }}"
+  shell: "{{ item }}"
   loop:
     - echo iptables-persistent iptables-persistent/autosave_v4 boolean true | sudo debconf-set-selections
     - echo iptables-persistent iptables-persistent/autosave_v6 boolean true | sudo debconf-set-selections
