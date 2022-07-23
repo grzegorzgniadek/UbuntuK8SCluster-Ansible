@@ -8,13 +8,13 @@ This documentation guides you in setting up a cluster with three master nodes, t
 ## Virtual Machines Environment
 |Role|FQDN|IP|OS|RAM|CPU|
 |----|----|----|----|----|----|
-|Load Balancer|ubuntulb1|192.168.1.8|Ubuntu 20.04 |8G|2|
-|Master|ubuntumaster1|192.168.1.2|Ubuntu 20.04|8G|2|
-|Master|ubuntumaster2|192.168.1.3|Ubuntu 20.04|8G|2|
-|Master|ubuntumaster3|192.168.1.4|Ubuntu 20.04|8G|2|
-|Worker|ubuntuworker1|192.168.1.5|Ubuntu 20.04|8G|2|
-|Worker|ubuntuworker1|192.168.1.6|Ubuntu 20.04|8G|2|
-|Worker|ubuntuworker1|192.168.1.7|Ubuntu 20.04|8G|2|
+|Load Balancer|ubuntulb1|192.168.2.8|Ubuntu 20.04 |8G|2|
+|Master|ubuntumaster1|192.168.2.2|Ubuntu 20.04|8G|2|
+|Master|ubuntumaster2|192.168.2.3|Ubuntu 20.04|8G|2|
+|Master|ubuntumaster3|192.168.2.4|Ubuntu 20.04|8G|2|
+|Worker|ubuntuworker1|192.168.2.5|Ubuntu 20.04|8G|2|
+|Worker|ubuntuworker1|192.168.2.6|Ubuntu 20.04|8G|2|
+|Worker|ubuntuworker1|192.168.2.7|Ubuntu 20.04|8G|2|
 
 ## Pre-requisites Master
 Use bootstrap scripts to set up iptables:
@@ -44,7 +44,7 @@ apt update && apt install -y haproxy
 Append the below lines to **/etc/haproxy/haproxy.cfg**
 ```
 frontend kubernetes-frontend
-    bind 192.168.1.8:6443
+    bind 192.168.2.8:6443
     mode tcp
     option tcplog
     default_backend kubernetes-backend
@@ -53,9 +53,9 @@ backend kubernetes-backend
     mode tcp
     option tcp-check
     balance roundrobin
-    server ubuntumaster1 192.168.1.2:6443 check fall 3 rise 2
-    server ubuntumaster2 192.168.1.3:6443 check fall 3 rise 2
-    server ubuntumaster3 192.168.1.4:6443 check fall 3 rise 2
+    server ubuntumaster1 192.168.2.2:6443 check fall 3 rise 2
+    server ubuntumaster2 192.168.2.3:6443 check fall 3 rise 2
+    server ubuntumaster3 192.168.2.4:6443 check fall 3 rise 2
 ```
 ##### Restart haproxy service
 ```
@@ -63,7 +63,7 @@ systemctl restart haproxy
 ```
 
 ## Set up cluster
-##### Run ansible-playbook on Masternode1 with ip 192.168.1.2
+##### Run ansible-playbook on Masternode1 with ip 192.168.2.2
 ```
 git clone https://github.com/grzegorzgniadek/UbuntuK8SCluster-Ansible.git
 cd UbuntuK8SCluster-Ansible
