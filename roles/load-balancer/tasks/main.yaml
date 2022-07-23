@@ -53,7 +53,7 @@
     path: /etc/haproxy/haproxy.cfg
     block: |
       frontend kubernetes-frontend
-          bind 192.168.1.8:6443
+          bind 192.168.2.8:6443
           mode tcp
           option tcplog
           default_backend kubernetes-backend
@@ -62,9 +62,9 @@
           mode tcp
           option tcp-check
           balance roundrobin
-          server ubuntumaster1 192.168.1.2:6443 check fall 3 rise 2
-          server ubuntumaster2 192.168.1.3:6443 check fall 3 rise 2
-          server ubuntumaster3 192.168.1.4:6443 check fall 3 rise 2
+          server ubuntumaster1 192.168.2.2:6443 check fall 3 rise 2
+          server ubuntumaster2 192.168.2.3:6443 check fall 3 rise 2
+          server ubuntumaster3 192.168.2.4:6443 check fall 3 rise 2
 
 - name: Restart haproxy service
   service:
