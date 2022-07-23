@@ -145,3 +145,14 @@
 - name: Add auto-completion kubectl
   shell: |
     kubectl completion bash | sudo tee /etc/bash_completion.d/kubectl > /dev/null
+
+- name: Remove /etc/containerd/config.toml
+  file:
+    path: /etc/containerd/config.toml
+    state: absent
+
+- name: Restart containerd
+  service: 
+    name: containerd
+    state: restarted
+    enabled: yes
