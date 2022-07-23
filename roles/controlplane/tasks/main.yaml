@@ -1,5 +1,5 @@
 - name: Initializing Kubernetes cluster
-  shell: kubeadm init --pod-network-cidr={{cidr_v}} --control-plane-endpoint="192.168.1.8:6443" --apiserver-cert-extra-sans=192.168.1.8 --upload-certs
+  shell: kubeadm init --pod-network-cidr={{cidr_v}} --control-plane-endpoint="192.168.2.8:6443" --apiserver-cert-extra-sans=192.168.2.8 --upload-certs
   register: output
 
 - name: Storing Logs and Generated token for future purpose.
