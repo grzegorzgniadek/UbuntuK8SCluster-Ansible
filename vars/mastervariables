@@ -1,4 +1,4 @@
-cidr_v: 172.16.0.0/16
+cidr_v: 172.12.0.0/24
 
 services:
 - docker
