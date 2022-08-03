@@ -11,39 +11,6 @@
     regexp: '(^/.*swap*)'
     replace: '# \1'
 
-- name: Iptables Allow TCP
-  iptables:
-    chain: INPUT
-    destination_port: "{{ item }}"
-    jump: ACCEPT
-    protocol: tcp
-  with_items: "{{ ports_tcp }}"
-
-- name: Iptables Allow UDP
-  iptables:
-    chain: INPUT
-    destination_port: "{{ item }}"
-    jump: ACCEPT
-    protocol: udp
-  with_items: "{{ ports_udp }}"
-
-- name: Iptables ESTABLISHED,RELATED
-  iptables:
-    chain: INPUT
-    ctstate: ESTABLISHED,RELATED
-    jump: ACCEPT
-
-- name: Firewall rule - drop any traffic without rule
-  iptables:
-    chain: INPUT
-    policy: DROP
-
-- name: Add iptables-persistent without input
-  shell: "{{ item }}"
-  loop:
-    - echo iptables-persistent iptables-persistent/autosave_v4 boolean true | sudo debconf-set-selections
-    - echo iptables-persistent iptables-persistent/autosave_v6 boolean true | sudo debconf-set-selections
-
 - name: Install dependencies
   apt: 
     update_cache: yes
@@ -54,11 +21,7 @@
     - gnupg
     - lsb-release
     - apt-transport-https
-    - iptables-persistent
-
-- name: Save iptables
-  shell: iptables-save > /etc/iptables/rules.v4
-
+    
 - name: Install docker-compose
   get_url:
     url: https://github.com/docker/compose/releases/download/v2.4.1/docker-compose-{{ ansible_system|lower }}-{{ ansible_architecture}}

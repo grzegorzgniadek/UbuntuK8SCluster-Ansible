@@ -4,17 +4,6 @@ services:
 - docker
 - kubelet
 
-ports_tcp:
-- "53"
-- "67"
-- "80"
-- "443"
-- "2222"
-- "10250"
-- "30000:32767"
-
-ports_udp:
-- "53"
 
 token_file: join_token
 

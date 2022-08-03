@@ -11,42 +11,12 @@
     regexp: '(^/.*swap*)'
     replace: '# \1'
 
-- name: Iptables Allow TCP
-  iptables:
-    chain: INPUT
-    destination_port: "{{ item }}"
-    jump: ACCEPT
-    protocol: tcp
-  with_items: "{{ ports_tcp }}"
-
-- name: Iptables Allow UDP
-  iptables:
-    chain: INPUT
-    destination_port: "{{ item }}"
-    jump: ACCEPT
-    protocol: udp
-  with_items: "{{ ports_udp }}"
-
-- name: Iptables ESTABLISHED,RELATED
-  iptables:
-    chain: INPUT
-    ctstate: ESTABLISHED,RELATED
-    jump: ACCEPT
-
-- name: Firewall rule - drop any traffic without rule
-  iptables:
-    chain: INPUT
-    policy: DROP
-
 - name: Install dependencies
   apt: 
     name: "{{ item }}"
   with_items:
       - haproxy
       - curl
-
-- name: Save iptables
-  shell: iptables-save > /etc/iptables/rules.v4
 
 - name: Insert config lines in haproxy
   blockinfile:
