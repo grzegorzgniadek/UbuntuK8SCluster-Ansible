@@ -4,6 +4,4 @@ services:
 - docker
 - kubelet
 
-
 token_file: join_token
-
